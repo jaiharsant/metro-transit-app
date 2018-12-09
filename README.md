@@ -13,9 +13,10 @@ POST:
 	
 Requirements
 ------------
-   Open JDK 11
-   Maven 3
-   Spring Boot Release 2.1.1
+   
+   -	Open JDK 11
+   -	Maven 3
+   -	Spring Boot Release 2.1.1
 
 Running the application locally
 -------------------------------
