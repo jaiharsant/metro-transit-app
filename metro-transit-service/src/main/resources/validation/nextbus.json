@@ -1,0 +1,18 @@
+{
+	"type": "object",
+	"properties": {
+		"route": {
+			"type": "string",
+			"format": "[a-zA-Z_0-9]"
+		},
+		"stop": {
+			"type": "string",
+			"format": "[a-zA-Z_0-9]"
+		},
+		"direction": {
+			"type": "string",
+			"format": "[a-zA-Z_0-9]"
+		}
+	},"required":["route","stop","direction"]
+	
+}
