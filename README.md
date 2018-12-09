@@ -3,19 +3,14 @@ Spring Boot MetroTransit Consumer App
 MetroTransitService provides an api which will tell you how long it is until the next bus on “BUS ROUTE” leaving from 
 “BUS STOP NAME” going “DIRECTION” using the api defined at http://svc.metrotransit.org/ 
 
-E.g
-Service URL:
-
-   http://localhost:8080/api/v1/trips/nextbus
+API Service URL:
+http://localhost:8080/api/v1/trips/nextbus
 
 POST:
-
-	{
-		"route": "METRO Blue Line",
-		"stop": "Mall of America Station",
-		"direction": "NORTH"
-	}
-
+	
+	curl --header "Content-Type: application/json" --request POST --data '{"route": "METRO Blue Line","stop": "Mall of America Station","direction": "NORTH"}' http://localhost:8080/api/v1/trips/nextbus
+	
+	
 Requirements
 ------------
    Open JDK 11
