@@ -9,11 +9,11 @@ Service URL:
    http://localhost:8080/api/v1/trips/nextbus
 
 POST:
-			'{
-				 "route": "METRO Blue Line",
-				 "stop": "Mall of America Station",
-				 "direction": "NORTH"
-			}'
+	{
+		"route": "METRO Blue Line",
+		"stop": "Mall of America Station",
+		"direction": "NORTH"
+	}
 
 Requirements
 ------------
