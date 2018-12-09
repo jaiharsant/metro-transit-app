@@ -10,11 +10,11 @@ Service URL:
 
 POST:
 
-	"{
+	{
 		"route": "METRO Blue Line",
 		"stop": "Mall of America Station",
 		"direction": "NORTH"
-	}"
+	}
 
 Requirements
 ------------
@@ -31,11 +31,11 @@ There are several ways to run a Spring Boot application on your local machine.
 
    2. Alternatively you can use the Spring Boot Maven plugin like so
         
-     'mvn spring-boot:run'
+     mvn spring-boot:run
     
    3. Alternatively you can pull Docker image "saravkandasa/metro-transit-service" from Docker registry and 
    run the following Docker run command
    
-     'docker run -p 8080:8080 saravkandasa/metro-transit-service'
+     docker run -p 8080:8080 saravkandasa/metro-transit-service
    
 
