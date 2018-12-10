@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.mts.controller.request.NextBusRequest;
+import com.mts.controller.response.NextBusResponse;
 import com.mts.service.NextBusService;
 import com.mts.validation.RequestValidator;
 
@@ -34,7 +35,7 @@ public class NextBusServiceController {
     RequestValidator requestValidator;
 
     @PostMapping(API_NEXTBUS)
-    String getNextRouteBus(InputStream input) throws IOException {
+    public NextBusResponse getNextRouteBus(InputStream input) throws IOException {
         return metroTransitService.getNextRouteBus(requestValidator.validate("validation/nextbus.json", input, NextBusRequest.class));
     }
 }

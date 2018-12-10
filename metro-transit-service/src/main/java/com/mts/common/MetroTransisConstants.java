@@ -23,13 +23,16 @@ public interface MetroTransisConstants {
     String VALIDATION_ERROR = "INVALID-INPUT";
 
     String ERROR_ROUTE_CODE = "100";
-    String ERROR_ROUTE_DESC = "Not a valid route description";
+    String ERROR_ROUTE_DESC = "Not a valid route";
 
     String ERROR_DIRECT_CODE = "101";
-    String ERROR_DIRECT_DESC = "Not a valid direction description";
+    String ERROR_DIRECT_DESC = "Not a valid direction for this route";
 
     String ERROR_STOP_CODE = "102";
-    String ERROR_STOP_DESC = "Not a valid stop description";
+    String ERROR_STOP_DESC = "Not a valid stop for this route";
+
+    String ERROR_NOBUS_CODE = "103";
+    String ERROR_NOBUS_DESC = "There is no bus schedule avilable now !";
 
 
 }

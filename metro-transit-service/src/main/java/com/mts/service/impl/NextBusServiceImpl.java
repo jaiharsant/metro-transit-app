@@ -13,10 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mts.controller.request.NextBusRequest;
+import com.mts.controller.response.NextBusResponse;
 import com.mts.domain.Direction;
 import com.mts.domain.NexTripDeparture;
 import com.mts.domain.Route;
 import com.mts.domain.TextValuePair;
+import com.mts.exception.BusinessException;
+import com.mts.exception.BusinessExceptionMessage;
 import com.mts.service.MetatDataService;
 import com.mts.service.NextBusService;
 
@@ -50,7 +53,7 @@ public class NextBusServiceImpl implements NextBusService {
      * @return
      */
     @Override
-    public String getNextRouteBus(final NextBusRequest nextBusRequest) {
+    public NextBusResponse getNextRouteBus(final NextBusRequest nextBusRequest) {
         Route route = metatDataService.getRoutes(nextBusRequest.getRoute());
 
         TextValuePair direction =
@@ -67,10 +70,16 @@ public class NextBusServiceImpl implements NextBusService {
         NexTripDeparture[] trips = tripEntity.getBody();
 
         if (trips == null || trips.length == 0) {
-            return "";
+            throw new BusinessException(new BusinessExceptionMessage(ERROR_NOBUS_CODE, ERROR_NOBUS_DESC));
         }
 
-        return trips[0].getDepartureText();
+        NextBusResponse response = new NextBusResponse();
+        response.setNextDeparture(trips[0].getDepartureText());
+        response.setDirection(nextBusRequest.getDirection());
+        response.setRoute(nextBusRequest.getRoute());
+        response.setStop(nextBusRequest.getStop());
+
+        return response;
     }
 
 }
