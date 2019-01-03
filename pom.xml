@@ -172,6 +172,7 @@
 	
 	<modules>
 		<module>metro-transit-service</module>
+		<module>metro-transit-reactive-service</module>
 	</modules>
 
 </project>

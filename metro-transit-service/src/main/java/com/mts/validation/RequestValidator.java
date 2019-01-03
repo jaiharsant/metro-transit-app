@@ -1,7 +1,3 @@
-/*
- * Copyright 2018 Apple, Inc
- * Apple Internal Use Only
- */
 
 
 package com.mts.validation;

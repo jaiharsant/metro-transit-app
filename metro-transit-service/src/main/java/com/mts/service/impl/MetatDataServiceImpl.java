@@ -1,7 +1,3 @@
-/*
- * Copyright 2018 Apple, Inc
- * Apple Internal Use Only
- */
 
 
 package com.mts.service.impl;
@@ -21,9 +17,9 @@ import com.mts.domain.TextValuePair;
 import com.mts.exception.BusinessException;
 import com.mts.exception.BusinessExceptionMessage;
 import com.mts.service.MetatDataService;
+import com.mts.spring.MetroTransitServiceProperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -38,23 +34,15 @@ public class MetatDataServiceImpl implements MetatDataService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${metro.baseUrl}")
-    private String baseUrl;
-
-    @Value("${metro.routes.url}")
-    private String routesUrl;
-
-    @Value("${metro.directions.url}")
-    private String directionsUrl;
-
-    @Value("${metro.stops.url}")
-    private String stopsUrl;
+    @Autowired
+    private MetroTransitServiceProperties metroTransitServiceProperties;
 
     private Route[] routes;
 
     @PostConstruct
     public void initData() {
-        ResponseEntity<Route[]> routesEntity = restTemplate.getForEntity(baseUrl + routesUrl, Route[].class);
+        ResponseEntity<Route[]> routesEntity =
+                    restTemplate.getForEntity(metroTransitServiceProperties.getBaseUrl() + metroTransitServiceProperties.getRoutesUrl(), Route[].class);
         routes = routesEntity.getBody();
     }
 
@@ -86,7 +74,7 @@ public class MetatDataServiceImpl implements MetatDataService {
     @Override
     public TextValuePair getRouteDirections(final String routeId, final String directionDesc) {
 
-        UriTemplate uriTemplate = new UriTemplate(baseUrl + directionsUrl);
+        UriTemplate uriTemplate = new UriTemplate(metroTransitServiceProperties.getBaseUrl() + metroTransitServiceProperties.getDirectionsUrl());
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put(URI_ROUTE, routeId);
 
@@ -113,7 +101,7 @@ public class MetatDataServiceImpl implements MetatDataService {
     @Override
     public TextValuePair getRouteDirectionStops(final String routeId, final String directionId, final String stopDesc) {
 
-        UriTemplate uriTemplate = new UriTemplate(baseUrl + stopsUrl);
+        UriTemplate uriTemplate = new UriTemplate(metroTransitServiceProperties.getBaseUrl() + metroTransitServiceProperties.getStopsUrl());
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put(URI_ROUTE, routeId);
         uriVariables.put(URI_DIRECTION, directionId);

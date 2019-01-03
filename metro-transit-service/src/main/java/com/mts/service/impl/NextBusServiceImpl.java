@@ -1,7 +1,3 @@
-/*
- * Copyright 2018 Apple, Inc
- * Apple Internal Use Only
- */
 
 
 package com.mts.service.impl;
@@ -22,9 +18,9 @@ import com.mts.exception.BusinessException;
 import com.mts.exception.BusinessExceptionMessage;
 import com.mts.service.MetatDataService;
 import com.mts.service.NextBusService;
+import com.mts.spring.MetroTransitServiceProperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -35,16 +31,13 @@ import org.springframework.web.util.UriTemplate;
 public class NextBusServiceImpl implements NextBusService {
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
     @Autowired
-    MetatDataService metatDataService;
+    private MetatDataService metatDataService;
 
-    @Value("${metro.baseUrl}")
-    String baseUrl;
-
-    @Value("${metro.nextTrip.url}")
-    String nextTripUrl;
+    @Autowired
+    private MetroTransitServiceProperties metroTransitServiceProperties;
 
     /**
      * Get next trip details
@@ -58,9 +51,10 @@ public class NextBusServiceImpl implements NextBusService {
 
         TextValuePair direction =
                     metatDataService.getRouteDirections(route.getRoute(), Direction.valueOf(nextBusRequest.getDirection().toUpperCase()).getText());
+
         TextValuePair stop = metatDataService.getRouteDirectionStops(route.getRoute(), direction.getValue(), nextBusRequest.getStop());
 
-        UriTemplate template = new UriTemplate(baseUrl + nextTripUrl);
+        UriTemplate template = new UriTemplate(metroTransitServiceProperties.getBaseUrl() + metroTransitServiceProperties.getNextTripUrl());
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put(URI_ROUTE, route.getRoute());
         uriVariables.put(URI_DIRECTION, direction.getValue());

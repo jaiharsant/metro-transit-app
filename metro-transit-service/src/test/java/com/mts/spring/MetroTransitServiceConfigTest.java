@@ -1,6 +1,6 @@
 /*
- * Copyright 2018 Apple, Inc
- * Apple Internal Use Only
+ * Copyright 2018 abc, Inc
+ * abc Internal Use Only
  */
 
 
@@ -34,7 +34,7 @@ import org.springframework.web.client.RestTemplate;
 @TestConfiguration
 @EnableConfigurationProperties
 @EnableCaching
-@Import(HttpClientConfig.class)
+@Import({ HttpClientConfig.class, MetroTransitServiceProperties.class })
 @PropertySource("classpath:application_test.properties")
 public class MetroTransitServiceConfigTest {
 
